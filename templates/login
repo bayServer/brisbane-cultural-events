@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login | Brisbane Cultural Events</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #005f73, #0a9396, #94d2bd);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.card {
+    background: white;
+    max-width: 430px;
+    width: 100%;
+    padding: 36px;
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(0,0,0,.22);
+}
+
+h1 {
+    text-align: center;
+    color: #005f73;
+    margin-bottom: 8px;
+}
+
+p {
+    text-align: center;
+    color: #526170;
+    margin-bottom: 22px;
+}
+
+label {
+    font-weight: bold;
+    color: #005f73;
+    font-size: .92rem;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 6px 0 16px;
+    border: 1px solid #cfd8dc;
+    border-radius: 9px;
+}
+
+button,
+.link {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 13px;
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    text-decoration: none;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+button {
+    background: #ee9b00;
+    color: white;
+}
+
+button:hover {
+    background: #ca6702;
+}
+
+.link {
+    background: #0a9396;
+    color: white;
+}
+
+.link:hover {
+    background: #08787a;
+}
+
+.guest {
+    background: white;
+    color: #005f73;
+    border: 1px solid #cfd8dc;
+}
+
+.error {
+    background: #fdeaea;
+    color: #9b2226;
+    border-left: 5px solid #9b2226;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    font-weight: bold;
+}
+
+.success {
+    background: #e8f7e8;
+    color: #256029;
+    border-left: 5px solid #2e7d32;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    font-weight: bold;
+}
+
+.divider {
+    text-align: center;
+    color: #6b7280;
+    margin: 18px 0 6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Welcome Back</h1>
+    <p>Log in to save favourites and plan cultural experiences.</p>
+
+    {% if error %}
+        <div class="error">{{ error }}</div>
+    {% endif %}
+
+    {% if success %}
+        <div class="success">{{ success }}</div>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('login') }}">
+        <label>Username</label>
+        <input type="text" name="username" required>
+
+        <label>Password</label>
+        <input type="password" name="password" required>
+
+        <button type="submit">Log In</button>
+    </form>
+
+    <a href="{{ url_for('register') }}" class="link">Create Account</a>
+
+    <div class="divider">or</div>
+
+    <a href="{{ url_for('continue_as_guest') }}" class="link guest">Continue as Guest</a>
+</div>
+
+</body>
+</html>
