@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locations | Brisbane Olympic Visitor Guide</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f7f4ed;
+            color: #1f2d3d;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(rgba(0, 95, 115, 0.78), rgba(10, 147, 150, 0.66)),
+                        url("https://images.unsplash.com/photo-1526481280695-3c4691f77c52?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+            color: white;
+            min-height: 76vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.10);
+            backdrop-filter: blur(6px);
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 10px 16px;
+            border-radius: 999px;
+            transition: 0.2s ease;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.18);
+        }
+
+        .active-link {
+            background-color: #ee9b00;
+            color: white;
+        }
+
+        .hero {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 0 70px;
+            display: grid;
+            grid-template-columns: 1.4fr 0.8fr;
+            gap: 30px;
+            align-items: end;
+        }
+
+        .hero-text h1 {
+            font-size: 3.3rem;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .hero-text p {
+            font-size: 1.08rem;
+            max-width: 720px;
+            margin-bottom: 24px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            display: inline-block;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .btn-primary {
+            background-color: #ee9b00;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #ca6702;
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.16);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.24);
+        }
+
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            max-width: 700px;
+        }
+
+        .hero-stat {
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .hero-stat strong {
+            display: block;
+            font-size: 1.45rem;
+            color: #ffd166;
+            margin-bottom: 4px;
+        }
+
+        .hero-panel {
+            background: rgba(255, 255, 255, 0.14);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 24px;
+        }
+
+        .hero-panel h2 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .hero-panel p {
+            margin-bottom: 10px;
+        }
+
+        .hero-panel ul {
+            padding-left: 18px;
+        }
+
+        .hero-panel li {
+            margin-bottom: 8px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 60px auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            color: #005f73;
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            max-width: 760px;
+            margin: 0 auto;
+            color: #526170;
+        }
+
+        .filter-bar {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 32px;
+            background: white;
+            padding: 22px;
+            border-radius: 18px;
+            box-shadow: 0 8px 20px rgba(0, 95, 115, 0.10);
+            border: 1px solid #e7ecec;
+        }
+
+        .filter-bar input,
+        .filter-bar select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cfd8dc;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            background: #fff;
+        }
+
+        .quick-guide {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 50px;
+        }
+
+        .quick-card {
+            background: white;
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 8px 20px rgba(0, 95, 115, 0.10);
+            border: 1px solid #e7ecec;
+        }
+
+        .quick-card h3 {
+            color: #005f73;
+            margin-bottom: 10px;
+            font-size: 1.15rem;
+        }
+
+        .quick-card p {
+            color: #526170;
+        }
+
+        .highlight-banner {
+            background: linear-gradient(135deg, #005f73, #0a9396);
+            color: white;
+            border-radius: 22px;
+            padding: 34px;
+            margin-bottom: 45px;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .highlight-banner h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.14);
+            padding: 22px;
+            border-radius: 18px;
+            text-align: center;
+        }
+
+        .map-box {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 8px 20px rgba(0, 95, 115, 0.10);
+            border: 1px solid #e7ecec;
+            margin-bottom: 45px;
+        }
+
+        .map-frame {
+            width: 100%;
+            height: 420px;
+            border: 0;
+            border-radius: 14px;
+            display: block;
+        }
+
+        .map-note {
+            margin-top: 14px;
+            color: #526170;
+            text-align: center;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 26px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 95, 115, 0.10);
+            border: 1px solid #e7ecec;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 26px rgba(0, 95, 115, 0.16);
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-content {
+            padding: 22px;
+        }
+
+        .badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: #e0f4f1;
+            color: #005f73;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .price-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .price-free {
+            background: #e8f7e8;
+            color: #256029;
+        }
+
+        .price-paid {
+            background: #e8f0fe;
+            color: #1d4ed8;
+        }
+
+        .price-premium {
+            background: #fdeaea;
+            color: #b42318;
+        }
+
+        .card-content h3 {
+            color: #005f73;
+            font-size: 1.35rem;
+            margin-bottom: 10px;
+        }
+
+        .meta {
+            color: #6b7280;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+
+        .card-content p {
+            color: #334155;
+            margin-bottom: 14px;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 16px;
+            background-color: #ee9b00;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: #ca6702;
+        }
+
+        .button.secondary {
+            background-color: #0a9396;
+        }
+
+        .button.secondary:hover {
+            background-color: #08787a;
+        }
+
+        .tips-section {
+            margin-top: 60px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .tip-card {
+            background: white;
+            border-radius: 18px;
+            padding: 24px;
+            box-shadow: 0 8px 20px rgba(0, 95, 115, 0.10);
+            border: 1px solid #e7ecec;
+        }
+
+        .tip-card h3 {
+            color: #005f73;
+            margin-bottom: 10px;
+        }
+
+        .tip-card p {
+            color: #526170;
+        }
+
+        footer {
+            background-color: #005f73;
+            color: white;
+            text-align: center;
+            padding: 26px;
+            margin-top: 70px;
+        }
+
+        @media (max-width: 900px) {
+            .hero,
+            .highlight-banner,
+            .quick-guide,
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-text h1 {
+                font-size: 2.6rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .filter-bar {
+                grid-template-columns: 1fr;
+            }
+
+            .map-frame {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                gap: 10px;
+            }
+
+            nav a {
+                padding: 8px 12px;
+                font-size: 0.95rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/home">Home</a>
+            <a href="/locations" class="active-link">Locations</a>
+            <a href="/olympic-events">Olympic Events</a>
+            <a href="/logout">Logout</a>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Explore Brisbane by place, mood and experience</h1>
+                <p>
+                    Discover Brisbane attractions, cultural spaces, outdoor highlights and visitor favourites in one easy guide. Search, filter and compare places to build a trip that fits your interests during the Games.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#featured" class="btn-primary">Browse locations</a>
+                    <a href="#map-section" class="btn-secondary">View map</a>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <strong>{{ activities|length }}</strong>
+                        <span>featured places</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>{{ categories|length }}</strong>
+                        <span>activity categories</span>
+                    </div>
+                    <div class="hero-stat">
+                        <strong>Brisbane</strong>
+                        <span>visitor-ready guide</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-panel">
+                <h2>Why this page is useful</h2>
+                <p>This page helps visitors plan beyond official Olympic events.</p>
+                <ul>
+                    <li>Search by suburb or attraction name</li>
+                    <li>Filter by category and budget</li>
+                    <li>Jump straight to a map view</li>
+                    <li>Compare experiences in a clear card layout</li>
+                </ul>
+            </div>
+        </section>
+    </header>
+
+    <main class="container">
+        <section class="section-header">
+            <h2>Find the right places faster</h2>
+            <p>
+                Use the filters below to narrow the page to locations that match your interests, budget and travel plans.
+            </p>
+        </section>
+
+        <div class="filter-bar">
+            <input type="text" id="searchInput" placeholder="Search by activity name or suburb">
+
+            <select id="categoryFilter">
+                <option value="all">All categories</option>
+                {% for category in categories %}
+                    <option value="{{ category }}">{{ category }}</option>
+                {% endfor %}
+            </select>
+
+            <select id="priceFilter">
+                <option value="all">All price ranges</option>
+                <option value="Free">Free</option>
+                <option value="Paid">Paid</option>
+                <option value="Premium">Premium</option>
+            </select>
+        </div>
+
+        <section class="quick-guide">
+            <div class="quick-card">
+                <h3>Culture & sightseeing</h3>
+                <p>Great for visitors wanting museums, galleries, landmarks and city experiences between Olympic activities.</p>
+            </div>
+            <div class="quick-card">
+                <h3>Easy day planning</h3>
+                <p>Use the map and suburb search to group nearby places together and make your day more efficient.</p>
+            </div>
+            <div class="quick-card">
+                <h3>Budget-friendly options</h3>
+                <p>Price badges help users quickly identify free, paid and premium experiences.</p>
+            </div>
+        </section>
+
+        <section class="highlight-banner">
+            <div>
+                <h2>More than just an attractions list</h2>
+                <p>
+                    This page combines database content, filters, map support and visitor-focused design. That makes it practical, interactive and clearly suited to an Olympic tourism website.
+                </p>
+            </div>
+            <div class="highlight-box">
+                <h3>Visitor focus</h3>
+                <p>Search, compare and plan with a consistent layout that matches the home page.</p>
+            </div>
+        </section>
+
+        <section id="map-section">
+            <div class="section-header">
+                <h2>Brisbane map</h2>
+                <p>
+                    Click “Show on map” on any card to update the map and jump straight to that area.
+                </p>
+            </div>
+
+            <div class="map-box">
+                <iframe
+                    id="mapFrame"
+                    class="map-frame"
+                    src="https://www.google.com/maps?q=Brisbane%20City&output=embed"
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+                <p class="map-note">This gives users a visual way to connect attraction information with place and location.</p>
+            </div>
+        </section>
+
+        <section id="featured">
+            <div class="section-header">
+                <h2>Featured locations</h2>
+                <p>
+                    Browse attractions and experiences pulled from the website database.
+                </p>
+            </div>
+
+            <div class="card-grid">
+                {% for activity in activities %}
+                <div
+                    class="card location-card"
+                    data-name="{{ activity.name|lower }}"
+                    data-suburb="{{ activity.suburb|lower }}"
+                    data-category="{{ activity.category }}"
+                    data-price="{{ activity.price_range }}"
+                >
+                    <img src="{{ activity.image_url }}" alt="{{ activity.name }}">
+                    <div class="card-content">
+                        <div class="badge-row">
+                            <span class="tag">{{ activity.cultural_tag }}</span>
+
+                            {% if activity.price_range == 'Free' %}
+                                <span class="price-badge price-free">Free</span>
+                            {% elif activity.price_range == 'Premium' %}
+                                <span class="price-badge price-premium">Premium</span>
+                            {% else %}
+                                <span class="price-badge price-paid">{{ activity.price_range }}</span>
+                            {% endif %}
+                        </div>
+
+                        <h3>{{ activity.name }}</h3>
+                        <p class="meta">{{ activity.category }} | {{ activity.suburb }}</p>
+                        <p>{{ activity.description }}</p>
+
+                        <div class="button-row">
+                            {% if activity.website_link %}
+                                <a class="button" href="{{ activity.website_link }}" target="_blank">Learn more</a>
+                            {% endif %}
+                            <button
+                                class="button secondary"
+                                type="button"
+                                onclick="showOnMap('{{ activity.name }} {{ activity.suburb }} Brisbane')"
+                            >
+                                Show on map
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="tips-section">
+            <div class="section-header">
+                <h2>Quick visitor tips</h2>
+                <p>
+                    Helpful reminders for users planning to explore Brisbane during the Olympic period.
+                </p>
+            </div>
+
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h3>Plan around event times</h3>
+                    <p>Visitors may want attractions close to transport or stadium precincts on busy days.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Mix free and paid experiences</h3>
+                    <p>A balanced itinerary can include both major attractions and simple low-cost sightseeing.</p>
+                </div>
+                <div class="tip-card">
+                    <h3>Use suburb search</h3>
+                    <p>Searching by suburb helps users group destinations together and reduce unnecessary travel.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Brisbane Olympic Visitor Guide</p>
+    </footer>
+
+    <script>
+        const searchInput = document.getElementById("searchInput");
+        const categoryFilter = document.getElementById("categoryFilter");
+        const priceFilter = document.getElementById("priceFilter");
+        const cards = document.querySelectorAll(".location-card");
+
+        function applyFilters() {
+            const searchValue = searchInput.value.toLowerCase();
+            const categoryValue = categoryFilter.value;
+            const priceValue = priceFilter.value;
+
+            cards.forEach(card => {
+                const name = card.dataset.name;
+                const suburb = card.dataset.suburb;
+                const category = card.dataset.category;
+                const price = card.dataset.price;
+
+                const matchesSearch = name.includes(searchValue) || suburb.includes(searchValue);
+                const matchesCategory = categoryValue === "all" || category === categoryValue;
+                const matchesPrice = priceValue === "all" || price === priceValue;
+
+                if (matchesSearch && matchesCategory && matchesPrice) {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+
+        function showOnMap(locationQuery) {
+            const mapFrame = document.getElementById("mapFrame");
+            mapFrame.src = "https://www.google.com/maps?q=" + encodeURIComponent(locationQuery) + "&output=embed";
+            window.scrollTo({
+                top: document.getElementById("mapFrame").offsetTop - 120,
+                behavior: "smooth"
+            });
+        }
+
+        searchInput.addEventListener("input", applyFilters);
+        categoryFilter.addEventListener("change", applyFilters);
+        priceFilter.addEventListener("change", applyFilters);
+    </script>
+</body>
+</html>

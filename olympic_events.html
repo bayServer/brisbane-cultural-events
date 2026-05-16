@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olympic Events | Brisbane Olympic Visitor Guide</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #f7f4ed;
+    color: #1f2d3d;
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(rgba(0, 95, 115, 0.78), rgba(10, 147, 150, 0.66)),
+                url("https://images.unsplash.com/photo-1517649763962-0c623066013b?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
+    color: white;
+    min-height: 72vh;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(6px);
+    flex-wrap: wrap;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px 16px;
+    border-radius: 999px;
+    transition: 0.2s ease;
+}
+
+nav a:hover,
+.active-link {
+    background-color: #ee9b00;
+}
+
+.hero {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 70px 0;
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: 3.3rem;
+    line-height: 1.1;
+    margin-bottom: 16px;
+}
+
+.hero p {
+    font-size: 1.08rem;
+    max-width: 720px;
+    margin-bottom: 24px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-outline,
+.button,
+.flash-ok {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    min-height: 42px;
+    font-size: 0.95rem;
+}
+
+.btn-primary,
+.button {
+    background-color: #ee9b00;
+    color: white;
+}
+
+.btn-primary:hover,
+.button:hover {
+    background-color: #ca6702;
+}
+
+.btn-secondary {
+    background-color: rgba(255, 255, 255, 0.16);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.24);
+}
+
+.btn-outline {
+    background: white;
+    color: #005f73;
+    border: 1px solid #cfd8dc;
+}
+
+.btn-outline:hover {
+    background: #f8fafc;
+}
+
+.hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    max-width: 720px;
+}
+
+.hero-stat {
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 16px;
+    padding: 16px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+}
+
+.hero-stat strong {
+    display: block;
+    font-size: 1.4rem;
+    color: #ffd166;
+    margin-bottom: 4px;
+}
+
+.hero-panel {
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    padding: 24px;
+}
+
+.hero-panel h2 {
+    margin-bottom: 10px;
+}
+
+.hero-panel ul {
+    padding-left: 18px;
+}
+
+/* Flash messages */
+.flash-wrapper {
+    width: 90%;
+    max-width: 1200px;
+    margin: 24px auto 0;
+}
+
+.flash-message {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    font-weight: bold;
+    box-shadow: 0 6px 16px rgba(0, 95, 115, 0.10);
+}
+
+.flash-success {
+    background: #e8f7e8;
+    color: #256029;
+    border-left: 5px solid #2e7d32;
+}
+
+.flash-error {
+    background: #fdeaea;
+    color: #9b2226;
+    border-left: 5px solid #9b2226;
+}
+
+.flash-info {
+    background: #e8f0fe;
+    color: #1d4ed8;
+    border-left: 5px solid #1d4ed8;
+}
+
+.flash-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.flash-ok {
+    background: white;
+    color: #005f73;
+    border: 1px solid #cfd8dc;
+    min-height: 34px;
+    padding: 8px 12px;
+}
+
+.flash-link {
+    color: inherit;
+    background: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid #cfd8dc;
+    font-size: 0.9rem;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 60px auto;
+}
+
+.notice {
+    background: #fff7e6;
+    border-left: 5px solid #ee9b00;
+    padding: 18px 20px;
+    border-radius: 12px;
+    margin-bottom: 35px;
+    color: #5f4b16;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.section-header h2 {
+    font-size: 2.2rem;
+    color: #005f73;
+    margin-bottom: 10px;
+}
+
+.section-header p {
+    max-width: 760px;
+    margin: auto;
+    color: #526170;
+}
+
+.timeline-grid,
+.zones-grid,
+.planning-grid {
+    display: grid;
+    gap: 22px;
+    margin-bottom: 45px;
+}
+
+.timeline-grid {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.zones-grid,
+.planning-grid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.timeline-card,
+.zone-card,
+.planning-card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 8px 20px rgba(0, 95, 115, 0.10);
+    border: 1px solid #e7ecec;
+}
+
+.timeline-card h3,
+.zone-card h3,
+.planning-card h3 {
+    color: #005f73;
+    margin-bottom: 8px;
+}
+
+.timeline-card p,
+.zone-card p,
+.planning-card p {
+    color: #526170;
+}
+
+.highlight-banner {
+    background: linear-gradient(135deg, #005f73, #0a9396);
+    color: white;
+    border-radius: 22px;
+    padding: 34px;
+    margin-bottom: 45px;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 20px;
+    align-items: center;
+}
+
+.highlight-banner h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.highlight-box {
+    background: rgba(255, 255, 255, 0.14);
+    padding: 22px;
+    border-radius: 18px;
+    text-align: center;
+}
+
+.controls-panel {
+    background: white;
+    border-radius: 20px;
+    padding: 22px;
+    box-shadow: 0 8px 20px rgba(0, 95, 115, 0.10);
+    border: 1px solid #e7ecec;
+    margin-bottom: 28px;
+}
+
+.controls-panel h3 {
+    color: #005f73;
+    margin-bottom: 12px;
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1fr auto;
+    gap: 12px;
+}
+
+.filter-grid input,
+.filter-grid select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cfd8dc;
+    border-radius: 10px;
+    font-size: 0.95rem;
+}
+
+.results-bar {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    color: #526170;
+    margin-bottom: 22px;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(295px, 1fr));
+    gap: 26px;
+}
+
+.card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 95, 115, 0.10);
+    border: 1px solid #e7ecec;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.tag,
+.location-badge,
+.status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: bold;
+}
+
+.tag {
+    background-color: #e0f4f1;
+    color: #005f73;
+}
+
+.location-badge {
+    background: #edf2f7;
+    color: #334155;
+}
+
+.status-badge {
+    background: #fff4d6;
+    color: #9a6700;
+}
+
+.card h3 {
+    color: #005f73;
+    font-size: 1.35rem;
+    margin-bottom: 10px;
+}
+
+.meta {
+    color: #6b7280;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #334155;
+    margin-bottom: 10px;
+}
+
+.event-details {
+    background: #f8fafc;
+    border-left: 4px solid #0a9396;
+    padding: 12px;
+    border-radius: 10px;
+    margin: 12px 0;
+    color: #526170;
+    font-size: 0.94rem;
+}
+
+.event-rating-box {
+    color: #ee9b00;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 8px 0 12px;
+}
+
+.event-rating-box span {
+    color: #526170;
+    letter-spacing: normal;
+    font-size: 0.86rem;
+    margin-left: 6px;
+}
+
+.event-comments-box {
+    background: #f8fafc;
+    border-left: 4px solid #0a9396;
+    border-radius: 12px;
+    padding: 12px;
+    margin: 12px 0;
+}
+
+.event-comments-box h4 {
+    color: #005f73;
+    margin-bottom: 8px;
+    font-size: 0.98rem;
+}
+
+.event-comments-scroll {
+    max-height: 130px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.event-comment {
+    background: white;
+    border: 1px solid #e7ecec;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 7px;
+    font-size: 0.84rem;
+}
+
+.event-comment-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.event-comment-top strong {
+    color: #005f73;
+}
+
+.event-comment-top span {
+    color: #ee9b00;
+    white-space: nowrap;
+}
+
+.event-comment p {
+    margin: 4px 0 0;
+}
+
+.empty-comment {
+    background: white;
+    border-radius: 8px;
+    padding: 8px;
+    color: #526170;
+    font-size: 0.85rem;
+}
+
+.event-review-form {
+    background: #f7f4ed;
+    border-radius: 12px;
+    padding: 12px;
+    margin: 12px 0;
+}
+
+.event-review-form textarea {
+    width: 100%;
+    min-height: 58px;
+    padding: 9px;
+    border: 1px solid #cfd8dc;
+    border-radius: 8px;
+    resize: vertical;
+    margin: 6px 0 8px;
+}
+
+.clickable-stars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 4px;
+    margin: 4px 0 8px;
+}
+
+.clickable-stars input {
+    display: none;
+}
+
+.clickable-stars label {
+    font-size: 1.75rem;
+    color: #cbd5e1;
+    cursor: pointer;
+    transition: 0.15s ease;
+    line-height: 1;
+}
+
+.clickable-stars input:checked ~ label,
+.clickable-stars label:hover,
+.clickable-stars label:hover ~ label {
+    color: #ee9b00;
+}
+
+.card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 12px;
+}
+
+.card-actions form {
+    display: flex;
+}
+
+.remove-button {
+    background: #9b2226;
+}
+
+.remove-button:hover {
+    background: #7a171b;
+}
+
+.no-results {
+    display: none;
+    background: white;
+    padding: 28px;
+    border-radius: 18px;
+    text-align: center;
+    color: #526170;
+    box-shadow: 0 8px 20px rgba(0, 95, 115, 0.10);
+    border: 1px solid #e7ecec;
+    margin-top: 20px;
+}
+
+.cta-box {
+    margin-top: 50px;
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 20px rgba(0, 95, 115, 0.10);
+    border: 1px solid #e7ecec;
+    text-align: center;
+}
+
+.cta-box h2 {
+    color: #005f73;
+    margin-bottom: 10px;
+}
+
+.cta-box p {
+    color: #526170;
+    margin-bottom: 18px;
+}
+
+footer {
+    background-color: #005f73;
+    color: white;
+    text-align: center;
+    padding: 26px;
+    margin-top: 70px;
+}
+
+@media (max-width: 900px) {
+    .hero,
+    .highlight-banner,
+    .timeline-grid,
+    .zones-grid,
+    .planning-grid,
+    .filter-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 2.6rem;
+    }
+
+    .hero-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .flash-message {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 600px) {
+    nav {
+        gap: 10px;
+    }
+
+    nav a {
+        padding: 8px 12px;
+        font-size: 0.95rem;
+    }
+
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+		<a href="/home">Home</a>
+		<a href="/locations">Cultural Experiences</a>
+		<a href="/olympic-events">Olympic Events</a>
+
+		{% if user_profile != "Guest" %}
+			<a href="/library">My Library</a>
+			<a href="/day-planner">Day Planner</a>
+		{% endif %}
+
+		{% if user_profile == "Admin" %}
+			<a href="/admin">Admin</a>
+		{% endif %}
+
+		<a href="/logout">Logout</a>
+	</nav>
+
+    <section class="hero">
+        <div>
+            <h1>Explore Brisbane’s Olympic and Paralympic event landscape</h1>
+            <p>
+                Preview Olympic event areas, save events to your library, and review experiences to help plan your Brisbane visit.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#events" class="btn-primary">View event preview</a>
+                <a href="/library" class="btn-secondary">Go to My Library</a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <strong>2032</strong>
+                    <span>host year</span>
+                </div>
+                <div class="hero-stat">
+                    <strong>2</strong>
+                    <span>major Games periods</span>
+                </div>
+                <div class="hero-stat">
+                    <strong>SEQ</strong>
+                    <span>regional venue focus</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-panel">
+            <h2>Use this page to</h2>
+            <ul>
+                <li>Browse Olympic event previews</li>
+                <li>Save events to your library</li>
+                <li>Add star ratings and comments</li>
+                <li>Compare regions and event types</li>
+            </ul>
+        </div>
+    </section>
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="flash-wrapper">
+            {% for category, message in messages %}
+                <div class="flash-message flash-{{ category }}">
+                    <span>{{ message }}</span>
+                    <div class="flash-actions">
+                        <a class="flash-link" href="/library">View Library</a>
+                        <button class="flash-ok" type="button" onclick="this.closest('.flash-message').remove()">OK</button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+<main class="container">
+
+    {% set events = [
+        {
+            "id": "athletics",
+            "name": "Athletics",
+            "category": "Stadium",
+            "location": "Brisbane",
+            "region": "brisbane",
+            "type": "stadium",
+            "schedule": "During Olympic Games window, exact times TBC",
+            "description": "Main stadium-based track and field events would be a major drawcard for visitors.",
+            "details": "Best for visitors who want major crowd atmosphere, iconic Olympic moments and central city energy."
+        },
+        {
+            "id": "swimming",
+            "name": "Swimming",
+            "category": "Aquatics",
+            "location": "Brisbane",
+            "region": "brisbane",
+            "type": "aquatics",
+            "schedule": "During Olympic Games window, exact times TBC",
+            "description": "Aquatic events are expected to be central to the host-city experience.",
+            "details": "Great for visitors interested in high-profile races, indoor venues and world-record potential."
+        },
+        {
+            "id": "football",
+            "name": "Football",
+            "category": "Team sport",
+            "location": "Brisbane / Gold Coast / Sydney",
+            "region": "brisbane gold coast sydney multiple",
+            "type": "team sport",
+            "schedule": "During Olympic Games window, exact times TBC",
+            "description": "Football often spans multiple cities, encouraging visitors to think regionally.",
+            "details": "Useful for visitors who may travel between regions and want a broader event itinerary."
+        },
+        {
+            "id": "cycling",
+            "name": "Cycling",
+            "category": "Cycling",
+            "location": "Brisbane / Sunshine Coast",
+            "region": "brisbane sunshine coast",
+            "type": "cycling outdoor",
+            "schedule": "During Olympic Games window, exact times TBC",
+            "description": "Road and regional cycling events may create opportunities for scenic spectator experiences.",
+            "details": "Ideal for users who want outdoor viewing, regional travel and scenic Queensland routes."
+        },
+        {
+            "id": "basketball",
+            "name": "Basketball",
+            "category": "Indoor arena",
+            "location": "Brisbane / Gold Coast",
+            "region": "brisbane gold coast",
+            "type": "indoor team sport",
+            "schedule": "During Olympic Games window, exact times TBC",
+            "description": "Indoor arena events provide high visitor appeal and suit major venue precincts.",
+            "details": "Good for visitors looking for fast-paced games, indoor comfort and big crowd atmosphere."
+        },
+        {
+            "id": "beach-volleyball",
+            "name": "Beach Volleyball",
+            "category": "Coastal venue",
+            "location": "Gold Coast",
+            "region": "gold coast coastal",
+            "type": "coastal team sport",
+            "schedule": "During Olympic Games window, exact times TBC",
+            "description": "Coastal venues would add to the Queensland tourism appeal during the Games.",
+            "details": "Best suited to visitors who want sport mixed with a beach, dining and coastal tourism day."
+        },
+        {
+            "id": "sailing",
+            "name": "Sailing",
+            "category": "Water sport",
+            "location": "Queensland coastal venue area",
+            "region": "coastal",
+            "type": "coastal water sport",
+            "schedule": "During Olympic Games window, exact times TBC",
+            "description": "Water-based competition extends the Olympic identity beyond the city centre.",
+            "details": "Useful for users who may want to combine sport viewing with coastal sightseeing."
+        },
+        {
+            "id": "mountain-bike",
+            "name": "Mountain Bike",
+            "category": "Outdoor course",
+            "location": "Sunshine Coast",
+            "region": "sunshine coast",
+            "type": "cycling outdoor",
+            "schedule": "During Olympic Games window, exact times TBC",
+            "description": "Regional outdoor venues help diversify the visitor experience across South East Queensland.",
+            "details": "Strong choice for visitors interested in outdoor venues, regional day trips and action sport."
+        },
+        {
+            "id": "para-sports",
+            "name": "Para Sports Preview",
+            "category": "Paralympics",
+            "location": "Brisbane / Gold Coast / Sunshine Coast",
+            "region": "brisbane gold coast sunshine coast multiple",
+            "type": "paralympics",
+            "schedule": "24 August – 5 September 2032, exact times TBC",
+            "description": "The Paralympic period extends travel opportunities and broadens the event focus for visitors.",
+            "details": "Important for inclusive event planning and extending visitor engagement beyond the Olympic window."
+        }
+    ] %}
+
+    <div class="notice">
+        Event schedules and venues may change as Brisbane 2032 planning continues. Use this page as a visitor-friendly planning guide.
+    </div>
+
+    <section class="section-header">
+        <h2>Games date window</h2>
+        <p>A simple overview of the two major event periods planned for Brisbane 2032.</p>
+    </section>
+
+    <section class="timeline-grid">
+        <div class="timeline-card">
+            <h3>Olympic Games</h3>
+            <p><strong>23 July – 8 August 2032</strong></p>
+            <p>This is the main Olympic competition window and the period most visitors are likely to plan around.</p>
+        </div>
+
+        <div class="timeline-card">
+            <h3>Paralympic Games</h3>
+            <p><strong>24 August – 5 September 2032</strong></p>
+            <p>This follows the Olympics and extends the tourism and event period across Brisbane and surrounding locations.</p>
+        </div>
+    </section>
+
+    <section class="highlight-banner">
+        <div>
+            <h2>Save Olympic events to your library</h2>
+            <p>
+                Create a personal event list by saving sports you are interested in. Your saved Olympic events appear in My Library,
+                separate from your saved visitor activities.
+            </p>
+        </div>
+        <div class="highlight-box">
+            <h3>Planning made easier</h3>
+            <p>Save, review and compare events before building your Brisbane visit.</p>
+        </div>
+    </section>
+
+    <section class="section-header">
+        <h2>Event regions at a glance</h2>
+        <p>The Games are expected to involve Brisbane and surrounding regions.</p>
+    </section>
+
+    <section class="zones-grid">
+        <div class="zone-card">
+            <h3>Brisbane</h3>
+            <p>Main host-city focus with major event, stadium and indoor arena activity.</p>
+        </div>
+        <div class="zone-card">
+            <h3>Gold Coast</h3>
+            <p>Supports selected sports and venue capacity across the wider Games footprint.</p>
+        </div>
+        <div class="zone-card">
+            <h3>Sunshine Coast</h3>
+            <p>Important for outdoor and regional event possibilities, including cycling-related activity.</p>
+        </div>
+    </section>
+
+    <section id="events">
+        <div class="section-header">
+            <h2>Olympic event preview</h2>
+            <p>Search, filter, save and review events that interest you.</p>
+        </div>
+
+        <div class="controls-panel">
+            <h3>Find Olympic events</h3>
+
+            <div class="filter-grid">
+                <input type="text" id="searchInput" placeholder="Search by sport, region or keyword">
+
+                <select id="locationFilter">
+                    <option value="all">All regions</option>
+                    <option value="brisbane">Brisbane</option>
+                    <option value="gold coast">Gold Coast</option>
+                    <option value="sunshine coast">Sunshine Coast</option>
+                    <option value="coastal">Coastal</option>
+                    <option value="multiple">Multiple regions</option>
+                </select>
+
+                <select id="typeFilter">
+                    <option value="all">All event types</option>
+                    <option value="stadium">Stadium</option>
+                    <option value="aquatics">Aquatics</option>
+                    <option value="team sport">Team sport</option>
+                    <option value="cycling">Cycling</option>
+                    <option value="indoor">Indoor</option>
+                    <option value="coastal">Coastal</option>
+                    <option value="paralympics">Paralympics</option>
+                </select>
+
+                <select id="sortFilter">
+                    <option value="name">Sort: Name A-Z</option>
+                    <option value="region">Sort: Region</option>
+                    <option value="type">Sort: Type</option>
+                </select>
+
+                <button class="btn-outline" type="button" id="resetFilters">Reset</button>
+            </div>
+        </div>
+
+        <div class="results-bar">
+            <p id="resultsCount">Showing all event previews</p>
+            <p>Tip: try “Brisbane”, “cycling”, “coastal” or “Paralympics”.</p>
+        </div>
+
+        <div class="card-grid" id="eventGrid">
+
+            {% for event in events %}
+
+                {% set review_bucket = olympic_review_data.get(event.id) if olympic_review_data else none %}
+
+                {% if review_bucket %}
+                    {% set event_rating = review_bucket.average %}
+                    {% set event_review_count = review_bucket.count %}
+                    {% set event_comments = review_bucket.comments %}
+                {% else %}
+                    {% set event_rating = 0 %}
+                    {% set event_review_count = 0 %}
+                    {% set event_comments = [] %}
+                {% endif %}
+
+                {% set rounded_event_rating = event_rating|round(0, 'floor')|int %}
+
+                <div class="card event-card"
+                     data-id="{{ event.id }}"
+                     data-name="{{ (event.name ~ ' ' ~ event.category ~ ' ' ~ event.description)|lower }}"
+                     data-location="{{ event.region|lower }}"
+                     data-type="{{ event.type|lower }}"
+                     data-sort-name="{{ event.name }}">
+
+                    <div class="badge-row">
+                        <span class="tag">{{ event.category }}</span>
+                        <span class="location-badge">{{ event.location }}</span>
+                        <span class="status-badge">TBC schedule</span>
+                    </div>
+
+                    <h3>{{ event.name }}</h3>
+                    <p class="meta">Location: {{ event.location }}</p>
+                    <p class="meta">Schedule: {{ event.schedule }}</p>
+                    <p>{{ event.description }}</p>
+
+                    <div class="event-details">
+                        {{ event.details }}
+                    </div>
+
+                    <div class="event-rating-box">
+                        {% if event_review_count > 0 %}
+                            {% for i in range(rounded_event_rating) %}★{% endfor %}
+                            {% for i in range(5 - rounded_event_rating) %}☆{% endfor %}
+                            <span>{{ event_review_count }} review{% if event_review_count != 1 %}s{% endif %}</span>
+                        {% else %}
+                            <span>No ratings yet</span>
+                        {% endif %}
+                    </div>
+
+                    <div class="event-comments-box">
+                        <h4>Visitor comments</h4>
+
+                        <div class="event-comments-scroll">
+                            {% if event_comments %}
+                                {% for comment in event_comments %}
+                                    <div class="event-comment">
+                                        <div class="event-comment-top">
+                                            <strong>{{ comment.username }}</strong>
+                                            <span>
+                                                {% for i in range(comment.rating) %}★{% endfor %}
+                                                {% for i in range(5 - comment.rating) %}☆{% endfor %}
+                                            </span>
+                                        </div>
+                                        <p>{{ comment.comment }}</p>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <p class="empty-comment">No comments yet. Be the first to review this event.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <form class="event-review-form" method="POST" action="{{ url_for('add_olympic_review', event_id=event.id) }}">
+                        <input type="hidden" name="event_name" value="{{ event.name }}">
+
+                        <div class="clickable-stars">
+                            <input type="radio" id="{{ event.id }}-star5" name="rating" value="5" checked>
+                            <label for="{{ event.id }}-star5">★</label>
+
+                            <input type="radio" id="{{ event.id }}-star4" name="rating" value="4">
+                            <label for="{{ event.id }}-star4">★</label>
+
+                            <input type="radio" id="{{ event.id }}-star3" name="rating" value="3">
+                            <label for="{{ event.id }}-star3">★</label>
+
+                            <input type="radio" id="{{ event.id }}-star2" name="rating" value="2">
+                            <label for="{{ event.id }}-star2">★</label>
+
+                            <input type="radio" id="{{ event.id }}-star1" name="rating" value="1">
+                            <label for="{{ event.id }}-star1">★</label>
+                        </div>
+
+                        <textarea name="comment" placeholder="Write a comment..." required></textarea>
+
+                        <button class="button" type="submit">Post review</button>
+                    </form>
+
+                    <div class="card-actions">
+                        {% if event.id in (olympic_favourite_ids|default([])) %}
+                            <form method="POST" action="{{ url_for('remove_olympic_favourite', event_id=event.id) }}">
+                                <button class="button remove-button" type="submit">Remove from Library</button>
+                            </form>
+                        {% else %}
+                            <form method="POST" action="{{ url_for('add_olympic_favourite') }}">
+                                <input type="hidden" name="event_id" value="{{ event.id }}">
+                                <input type="hidden" name="name" value="{{ event.name }}">
+                                <input type="hidden" name="category" value="{{ event.category }}">
+                                <input type="hidden" name="location" value="{{ event.location }}">
+                                <input type="hidden" name="schedule" value="{{ event.schedule }}">
+                                <input type="hidden" name="description" value="{{ event.description }}">
+                                <button class="button" type="submit">Save to Library ★</button>
+                            </form>
+                        {% endif %}
+
+                        <a href="/locations" class="btn-outline">View places nearby</a>
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="no-results" id="noResults">
+            <h3>No matching events found</h3>
+            <p>Try changing your search or filter options.</p>
+        </div>
+    </section>
+
+    <section class="planning-section">
+        <div class="section-header">
+            <h2>Visitor planning ideas</h2>
+            <p>Use your saved events with nearby attractions to build a balanced Brisbane visit.</p>
+        </div>
+
+        <div class="planning-grid">
+            <div class="planning-card">
+                <h3>Stay flexible</h3>
+                <p>Because final schedules may change, build flexible plans with extra sightseeing options.</p>
+            </div>
+            <div class="planning-card">
+                <h3>Explore beyond venues</h3>
+                <p>Pair an event day with riverfront attractions, museums or dining in nearby areas.</p>
+            </div>
+            <div class="planning-card">
+                <h3>Use your library</h3>
+                <p>Save your favourite events, then return to your library to compare and plan.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="cta-box">
+        <h2>Ready to plan your visit?</h2>
+        <p>Save events here, then add Brisbane activities from the Locations page.</p>
+        <a href="/library" class="btn-primary">Open My Library</a>
+    </div>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Brisbane Olympic Visitor Guide</p>
+</footer>
+
+<script>
+const searchInput = document.getElementById("searchInput");
+const locationFilter = document.getElementById("locationFilter");
+const typeFilter = document.getElementById("typeFilter");
+const sortFilter = document.getElementById("sortFilter");
+const resetFilters = document.getElementById("resetFilters");
+const eventGrid = document.getElementById("eventGrid");
+const eventCards = Array.from(document.querySelectorAll(".event-card"));
+const resultsCount = document.getElementById("resultsCount");
+const noResults = document.getElementById("noResults");
+
+function applyEventFilters() {
+    const searchValue = searchInput.value.trim().toLowerCase();
+    const locationValue = locationFilter.value.toLowerCase();
+    const typeValue = typeFilter.value.toLowerCase();
+
+    let visibleCount = 0;
+
+    eventCards.forEach(card => {
+        const name = card.dataset.name || "";
+        const location = card.dataset.location || "";
+        const type = card.dataset.type || "";
+
+        const matchesSearch =
+            searchValue === "" ||
+            name.includes(searchValue) ||
+            location.includes(searchValue) ||
+            type.includes(searchValue);
+
+        const matchesLocation =
+            locationValue === "all" || location.includes(locationValue);
+
+        const matchesType =
+            typeValue === "all" || type.includes(typeValue);
+
+        if (matchesSearch && matchesLocation && matchesType) {
+            card.style.display = "flex";
+            visibleCount++;
+        } else {
+            card.style.display = "none";
+        }
+    });
+
+    sortEvents();
+
+    if (visibleCount === 0) {
+        noResults.style.display = "block";
+        resultsCount.textContent = "Showing 0 event previews";
+    } else {
+        noResults.style.display = "none";
+        resultsCount.textContent =
+            "Showing " + visibleCount + " event preview" + (visibleCount === 1 ? "" : "s");
+    }
+}
+
+function sortEvents() {
+    const sortValue = sortFilter.value;
+
+    const sorted = [...eventCards].sort((a, b) => {
+        if (sortValue === "region") {
+            return (a.dataset.location || "").localeCompare(b.dataset.location || "");
+        }
+
+        if (sortValue === "type") {
+            return (a.dataset.type || "").localeCompare(b.dataset.type || "");
+        }
+
+        return (a.dataset.sortName || "").localeCompare(b.dataset.sortName || "");
+    });
+
+    sorted.forEach(card => eventGrid.appendChild(card));
+}
+
+searchInput.addEventListener("input", applyEventFilters);
+locationFilter.addEventListener("change", applyEventFilters);
+typeFilter.addEventListener("change", applyEventFilters);
+sortFilter.addEventListener("change", applyEventFilters);
+
+resetFilters.addEventListener("click", function () {
+    searchInput.value = "";
+    locationFilter.value = "all";
+    typeFilter.value = "all";
+    sortFilter.value = "name";
+    applyEventFilters();
+});
+
+applyEventFilters();
+</script>
+
+</body>
+</html>
